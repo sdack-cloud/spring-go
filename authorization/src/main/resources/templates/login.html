@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Authorization</title>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="/static/assets/css/signin.css" th:href="@{/assets/css/signin.css}" />
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" method="post" th:action="@{/login}">
+        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+            <span th:text="${session?.SPRING_SECURITY_LAST_EXCEPTION?.message}" ></span>
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success" role="alert">
+            您已退出
+        </div>
+        <h2 class="form-signin-heading">登录</h2>
+        <p>
+            <label for="username" class="sr-only">账号</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="您的账号或邮箱" required autofocus>
+        </p>
+        <p>
+            <label for="password" class="sr-only">密码</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="您的密码" required>
+        </p>
+        <p>
+            <input id="checkbox-signup" type="checkbox" name="remember-me" >
+            <label for="checkbox-signup"> 记住我 </label>
+        </p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <a class="btn btn-light btn-block bg-white" href="/register" role="link" style="text-transform: none;">
+            注册您的账号
+        </a>
+    </form>
+</div>
+</body>
+</html>

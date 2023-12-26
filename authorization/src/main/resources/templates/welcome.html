@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>welcome</title>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="/static/assets/css/signin.css" th:href="@{/assets/css/signin.css}" />
+</head>
+<body>
+<div class="container">
+    <h2>Welcome <span th:text="${user?.nickname}"></span></h2>
+    <hr/>
+    <h4>账号:<span th:text="${user?.account}"></span></h4>
+    <hr/>
+    <h4>Email: <span th:text="${user?.email}"></span></h4>
+    <hr/>
+
+    <hr/>
+    <a  class="btn btn-light btn-block bg-primary text-white" href="/logout" role="link" style="text-transform: none;">
+        退出
+    </a>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>welcome</title>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css" th:href="@{/static/assets/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="/static/assets/css/signin.css" th:href="@{/static/assets/css/signin.css}" />
+</head>
+<body>
+<div class="container">
+    <h2>您的账号 未激活</h2>
+    <h4>请查看 邮箱激活码进行激活</h4>
+
+    <p>[[ ${error} ]]</p>
+
+    <a  class="btn btn-light btn-block bg-white" th:href="@{/resend(account=${account})}" role="link" style="text-transform: none;">
+        重新发送
+    </a>
+    <a class="btn btn-light btn-block bg-primary" href="/login" role="link" style="text-transform: none;">
+        登录
+    </a>
+</div>
+</body>
+</html>

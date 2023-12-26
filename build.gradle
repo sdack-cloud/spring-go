@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group = 'cn.sdack.go'
+version = '1.0'
+
+java {
+    sourceCompatibility = '17'
+}
+
+
+subprojects {
+    apply plugin :"java"
+
+    ext {
+        set('springCloudVersion', "2022.0.0")
+        set('springCloudAlibabaVersion', "2022.0.0.0-RC*")
+    }
+    repositories {
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url "https://maven.aliyun.com/nexus/content/groups/spring/" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        mavenLocal()
+        mavenCentral()
+    }
+
+
+    dependencies {
+
+    }
+
+
+}
+
+test {
+    useJUnitPlatform()
+}

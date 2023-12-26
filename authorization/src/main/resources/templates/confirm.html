@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>welcome</title>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css" th:href="@{/static/assets/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="/static/assets/css/signin.css" th:href="@{/static/assets/css/signin.css}" />
+</head>
+<body>
+<div class="container">
+
+    <p>[[ ${error} ]]</p>
+
+    <a  class="btn btn-light btn-block bg-white" href="/login" role="link" style="text-transform: none;">
+        登录
+    </a>
+</div>
+</body>
+</html>
