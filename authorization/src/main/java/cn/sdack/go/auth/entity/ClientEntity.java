@@ -1,6 +1,8 @@
 package cn.sdack.go.auth.entity;
 
 /**
+ * 注册客户端
+ *
  * @author sdack
  * @date 2023/12/23
  */

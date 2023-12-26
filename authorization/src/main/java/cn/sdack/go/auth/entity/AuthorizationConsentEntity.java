@@ -9,6 +9,11 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * 同意授权
+ * @author sdack
+ * @date 2023/12/23
+ */
 @Entity
 @Table(name = "`authorization_onsent`")
 @IdClass(AuthorizationConsentEntity.AuthorizationConsentId.class)

@@ -1,15 +1,16 @@
 package cn.sdack.go.auth.entity;
 
 /**
+ * 已授权客户端
  * @author sdack
  * @date 2023/12/23
  */
-import java.time.Instant;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import java.time.Instant;
 
 @Entity
 @Table(name = "`authorization`")

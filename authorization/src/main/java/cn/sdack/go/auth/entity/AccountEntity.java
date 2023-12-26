@@ -22,6 +22,12 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 
+
+/**
+ * 账户
+ * @author sdack
+ * @date 2023/12/23
+ */
 @Entity
 @Table(name = "accounts", indexes = {
         @Index(name = "idx_account_email", columnList = "email"),
