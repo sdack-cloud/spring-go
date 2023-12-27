@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.client.RestTemplate;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -24,7 +24,7 @@ class AuthorizationApplicationTests {
         String encode = passwordEncoder.encode(s);
         System.out.println(encode);
     }
-
+    @Test
     void test1() throws NoSuchAlgorithmException {
         SecureRandom secureRandom = new SecureRandom();
         byte[] code = new byte[128];
@@ -37,4 +37,14 @@ class AuthorizationApplicationTests {
         String challenge = Base64.encodeBase64URLSafeString(digest);
         System.out.println(challenge);
     }
+
+    @Test
+    void test2() {
+        RestTemplate restTemplate = new RestTemplate();
+//        ResponseEntity<String> forEntity = restTemplate.getForEntity("http://localhost:8080/authority", String.class);
+//        HttpStatusCode statusCode = forEntity.getStatusCode();
+//        String body = forEntity.getBody();
+    }
+
+
 }

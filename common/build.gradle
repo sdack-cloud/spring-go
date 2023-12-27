@@ -1,0 +1,31 @@
+plugins {
+    id 'java-library'
+    id 'org.springframework.boot' version '3.2.1'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'cn.sdack.go'
+version = '1.0'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.2.1'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.2.1'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.1'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.14.2'
+    implementation 'com.alibaba:fastjson:1.2.62'
+    implementation 'cn.hutool:hutool-core:5.8.23'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

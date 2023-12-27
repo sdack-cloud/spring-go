@@ -13,7 +13,6 @@ spring:
       database: 2
       host: localhost
       port: 6379
-      #password: iLCJzYXMiOlsiZCIsImUiLCJmIiwiYSIsInUiLCJsIiwidCJdLCJyb2xlcyI6WyIiXSwiaXNzIjoiUlNvY2tldEJyb2tlciIsImlkIjoiZDBlOTcyYWEtNWFmYy00NWQ1LTk5MjMtYmE2MDA4ODA3NzkxIiwib3JncyI6WyIiXSwiaWF0IjoxNjYwNTIyODAzLCJhdXRob3JpdGllcyI6WyIiXX0
       timeout: 5s
       lettuce:
         pool:

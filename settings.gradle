@@ -1,2 +1,4 @@
 rootProject.name = 'spring-go'
 include ':users'
+include ':common'
+

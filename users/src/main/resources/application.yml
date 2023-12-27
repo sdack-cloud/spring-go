@@ -1,1 +1,47 @@
-
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+            issuer-uri: http://localhost:9999
+  data:
+    redis:
+      database: 5
+      host: localhost
+      port: 6379
+      timeout: 5s
+      lettuce:
+        pool:
+          min-idle: 5
+          max-idle: 8
+          max-wait: -1
+          max-active: 8
+  datasource:
+    username: sdack
+    password:
+    driver-class-name: org.postgresql.Driver # com.mysql.jdbc.Driver  com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/sdack?currentSchema=test
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initialSize: 6
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM pg_tables
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect # org.hibernate.dialect.PostgreSQLDialect  org.hibernate.dialect.SQLServerDialect  org.hibernate.dialect.MySQLDialect  org.hibernate.dialect.OracleDialect
+    hibernate:
+      properties: {hibernate.format-sql: true}
+      ddl-auto: update

@@ -1,6 +1,7 @@
 package cn.sdack.go.auth.config;
 
 import cn.sdack.go.auth.dao.AccountDao;
+import cn.sdack.go.auth.entity.AccountEntity;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
@@ -15,9 +16,11 @@ import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
@@ -25,6 +28,7 @@ import org.springframework.security.oauth2.server.authorization.token.*;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
+import org.springframework.web.client.RestTemplate;
 
 import java.security.KeyPair;
 import java.security.interfaces.RSAPublicKey;
@@ -47,6 +51,7 @@ public class AuthorizationServer {
     @Autowired
     AccountDao accountDao;
 
+    RestTemplate restTemplate = new RestTemplate();
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -59,8 +64,10 @@ public class AuthorizationServer {
 
 
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-                .authorizationEndpoint(endpoint ->
-                        endpoint.consentPage("/oauth2/consent")
+                .deviceVerificationEndpoint(deviceVerificationEndpoint ->
+                        deviceVerificationEndpoint
+                                .consentPage("/device/consent")
+
                 )
                 .oidc(Customizer.withDefaults());
 
@@ -112,11 +119,20 @@ public class AuthorizationServer {
     @Bean
     public OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer() {
         return context -> {
+            RegisteredClient client = context.getRegisteredClient();
+            Authentication principal = context.getPrincipal();
+            AccountEntity user = (AccountEntity) principal.getPrincipal();
+
             JwsHeader.Builder headers = context.getJwsHeader();
             JwtClaimsSet.Builder claims = context.getClaims();
             if (context.getTokenType().equals(OAuth2TokenType.ACCESS_TOKEN)) {
                 // TODO 自定义 access_token 的 headers/claims
                 claims.claim("abc","abc");
+
+                // TODO 根据提供的权限连接去请求权限列表，每一个客户端所用的权限可能都不一样，客户端可以根据RBAC权限模型 定制权限
+                // 权限这里的权限就是一个个英文单词 SimpleGrantedAuthority authority = new SimpleGrantedAuthority("userinfo");
+
+//                restTemplate.getForEntity("")
                 claims.claim("authorities","authorities");
             } else if (context.getTokenType().getValue().equals(OidcParameterNames.ID_TOKEN)) {
                 // TODO 自定义 id_token 的 headers/claims

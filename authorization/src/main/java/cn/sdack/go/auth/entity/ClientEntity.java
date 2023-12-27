@@ -6,13 +6,13 @@ package cn.sdack.go.auth.entity;
  * @author sdack
  * @date 2023/12/23
  */
-import java.time.Instant;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import java.time.Instant;
 
 @Entity
 @Table(name = "`client`")
@@ -54,6 +54,11 @@ public class ClientEntity {
     @JsonIgnore
     @Column(length = 80)
     private String secret;
+
+    // 获取权限连接
+    @JsonIgnore
+    @Column(length = 500)
+    private String link;
 
     public String getId() {
         return id;
