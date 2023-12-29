@@ -5,7 +5,6 @@ import cn.sdack.go.auth.dao.AccountDao;
 import cn.sdack.go.auth.entity.AccountEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsPasswordService;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -71,9 +70,9 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserDetailsPa
             throw new UsernameNotFoundException("用户不存在");
         }
 
-        if (user.getPassword() == null || user.getPassword().isEmpty()) {
+        /*if (user.getPassword() == null || user.getPassword().isEmpty()) {
             throw new BadCredentialsException("密码未设置,请先重置密码");
-        }
+        }*/
 
         return user;
     }

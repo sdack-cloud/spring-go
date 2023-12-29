@@ -51,19 +51,27 @@ public class DefaultSecurity {
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http,RememberMeServices rememberMeServices,PasswordEncoder passwordEncoder) throws Exception {
         http.cors(Customizer.withDefaults());
 
+        CustomAuthenticationProvider customAuthenticationProvider = new CustomAuthenticationProvider();
+        userDetailsService.passwordEncoder = passwordEncoder;
+        customAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+        customAuthenticationProvider.setUserDetailsService(userDetailsService);
+        customAuthenticationProvider.setUserDetailsPasswordService(userDetailsService);
+        customAuthenticationProvider.setHideUserNotFoundExceptions(false);
+        customAuthenticationProvider.stringRedisTemplate = stringRedisTemplate;
+
         http
+                .authenticationProvider(customAuthenticationProvider)
                 .authorizeHttpRequests(authorize ->
                         authorize
                                 .requestMatchers("/assets/**", "/webjars/**", "/login", "/logout",
-                                        "/register", "/activate", "/confirm", "/resend", "/success",
+                                        "/register", "/activate", "/confirm", "/resend", "/success","/sendSmsCode",
                                         "/open/**", "/authorization_code")
                                 .permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
                         formLogin.loginPage("/login")
-                        .defaultSuccessUrl("/index")
-//                                .successForwardUrl("/index")
+                                .successForwardUrl("/index")
                 )
                 .logout(logout ->
                         logout.logoutUrl("/logout")

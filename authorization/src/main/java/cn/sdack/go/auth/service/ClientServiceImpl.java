@@ -1,5 +1,6 @@
 package cn.sdack.go.auth.service;
 
+import cn.sdack.go.auth.config.GrantTypeNames;
 import cn.sdack.go.auth.dao.ClientDao;
 import cn.sdack.go.auth.dao.JpaRegisteredClientRepository;
 import cn.sdack.go.auth.entity.ClientEntity;
@@ -87,6 +88,9 @@ public class ClientServiceImpl implements ClientService {
             });
             param.getGrantTypes().stream().filter("jwt_bearer"::equals).findAny().ifPresent(it -> {
                 builder.authorizationGrantType(AuthorizationGrantType.JWT_BEARER);
+            });
+            param.getGrantTypes().stream().filter("sms_code"::equals).findAny().ifPresent(it -> {
+                builder.authorizationGrantType(new AuthorizationGrantType(GrantTypeNames.SMS_CODE));
             });
         }
         if (!param.getMethods().isEmpty()) {
