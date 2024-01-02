@@ -50,6 +50,8 @@ public class DefaultSecurity {
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http,RememberMeServices rememberMeServices,PasswordEncoder passwordEncoder) throws Exception {
         http.cors(Customizer.withDefaults());
+        http.cors(corsCustomizer ->
+                corsCustomizer.configurationSource(corsConfigurationSource()));
 
         CustomAuthenticationProvider customAuthenticationProvider = new CustomAuthenticationProvider();
         userDetailsService.passwordEncoder = passwordEncoder;
@@ -71,7 +73,7 @@ public class DefaultSecurity {
                 )
                 .formLogin(formLogin ->
                         formLogin.loginPage("/login")
-                                .successForwardUrl("/index")
+                                .defaultSuccessUrl("/index")
                 )
                 .logout(logout ->
                         logout.logoutUrl("/logout")
@@ -113,12 +115,10 @@ public class DefaultSecurity {
         return keyStoreKeyFactory.getKeyPair("testttst");
     }
 
-    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-//        originList.forEach { println(it) }
         CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.allowedOrigins = originList
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(false); // 是否返回时生成凭证
+        configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
