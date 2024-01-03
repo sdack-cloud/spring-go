@@ -49,7 +49,7 @@ public class DefaultSecurity {
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http,RememberMeServices rememberMeServices,PasswordEncoder passwordEncoder) throws Exception {
-        http.cors(Customizer.withDefaults());
+//        http.cors(Customizer.withDefaults());
         http.cors(corsCustomizer ->
                 corsCustomizer.configurationSource(corsConfigurationSource()));
 
@@ -115,9 +115,10 @@ public class DefaultSecurity {
         return keyStoreKeyFactory.getKeyPair("testttst");
     }
 
+    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(false); // 是否返回时生成凭证
+        configuration.setAllowCredentials(false);
         configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(List.of("*"));
