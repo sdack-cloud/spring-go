@@ -94,13 +94,13 @@ public class AccountEntity implements UserDetails {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(columnDefinition="timestamp default now()",insertable = false, updatable = false)
+    @Column(insertable = false, updatable = true)
     public LocalDateTime created = null;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(columnDefinition="timestamp default now()",insertable = false, updatable = true)
+    @Column(insertable = false, updatable = true)
     public LocalDateTime modified = null;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
