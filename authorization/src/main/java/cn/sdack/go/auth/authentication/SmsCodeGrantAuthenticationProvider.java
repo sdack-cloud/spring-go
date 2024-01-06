@@ -126,7 +126,6 @@ public class SmsCodeGrantAuthenticationProvider implements AuthenticationProvide
         OAuth2AccessToken accessToken = new OAuth2AccessToken(OAuth2AccessToken.TokenType.BEARER,
                 generatedAccessToken.getTokenValue(), generatedAccessToken.getIssuedAt(),
                 generatedAccessToken.getExpiresAt(), scopeSet);
-
         // Initialize the OAuth2Authorization
         OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient)
                 .principalName(clientPrincipal.getName())

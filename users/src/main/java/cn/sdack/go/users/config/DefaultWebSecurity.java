@@ -9,6 +9,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.IpAddressMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 /**
  * @author sdack
@@ -22,7 +27,7 @@ public class DefaultWebSecurity {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.cors(Customizer.withDefaults());
+        http.cors(it -> it.configurationSource(corsConfigurationSource()));
         http
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers("/open/**")
@@ -38,15 +43,15 @@ public class DefaultWebSecurity {
         return http.build();
     }
 
-    /*@Bean
+    @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins();
-        configuration.setAllowCredentials();
-        configuration.setAllowedHeaders();
-        configuration.setAllowedMethods();
-        UrlBasedCorsConfigurationSource  source = new UrlBasedCorsConfigurationSource();
+        configuration.setAllowCredentials(false);
+        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowedMethods(List.of("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }*/
+    }
 }

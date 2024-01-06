@@ -48,25 +48,17 @@ public class DefaultSecurity {
     UserDetailsServiceImpl userDetailsService;
 
     @Bean
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http,RememberMeServices rememberMeServices,PasswordEncoder passwordEncoder) throws Exception {
-//        http.cors(Customizer.withDefaults());
+    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http, PasswordEncoder passwordEncoder
+            , RememberMeServices rememberMeServices) throws Exception {
         http.cors(corsCustomizer ->
                 corsCustomizer.configurationSource(corsConfigurationSource()));
 
-        CustomAuthenticationProvider customAuthenticationProvider = new CustomAuthenticationProvider();
-        userDetailsService.passwordEncoder = passwordEncoder;
-        customAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-        customAuthenticationProvider.setUserDetailsService(userDetailsService);
-        customAuthenticationProvider.setUserDetailsPasswordService(userDetailsService);
-        customAuthenticationProvider.setHideUserNotFoundExceptions(false);
-        customAuthenticationProvider.stringRedisTemplate = stringRedisTemplate;
 
         http
-                .authenticationProvider(customAuthenticationProvider)
                 .authorizeHttpRequests(authorize ->
                         authorize
                                 .requestMatchers("/assets/**", "/webjars/**", "/login", "/logout",
-                                        "/register", "/activate", "/confirm", "/resend", "/success","/sendSmsCode",
+                                        "/register", "/sendSmsCode","/userinfo",
                                         "/open/**", "/authorization_code")
                                 .permitAll()
                                 .anyRequest().authenticated()

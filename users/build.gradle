@@ -26,6 +26,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.apache.commons:commons-pool2:2.11.1'
     implementation 'cn.hutool:hutool-core:5.8.23'
+//    implementation 'io.swagger.core.v3:swagger-core:2.2.20'
 
     implementation([project(':common')]) {
         exclude group: 'org.springframework.boot'
