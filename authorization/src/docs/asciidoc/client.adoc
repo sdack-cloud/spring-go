@@ -1,0 +1,17 @@
+
+
+include::{snippets}/client/http-request.adoc[]
+include::{snippets}/client/form-parameters.adoc[]
+include::{snippets}/client/request-fields.adoc[]
+include::{snippets}/client/request-body.adoc[]
+include::{snippets}/client/http-response.adoc[]
+include::{snippets}/client/response-fields.adoc[]
+
+= 2
+
+include::{snippets}/client/updateSecret/http-request.adoc[]
+include::{snippets}/client/updateSecret/query-parameters.adoc[]
+include::{snippets}/client/updateSecret/request-fields.adoc[]
+include::{snippets}/client/updateSecret/request-body.adoc[]
+include::{snippets}/client/updateSecret/http-response.adoc[]
+include::{snippets}/client/updateSecret/response-fields.adoc[]

@@ -53,5 +53,6 @@ spring:
 logging:
   level:
     cn.sdack: warn
-    org.springframework.security: debug
-    org.springframework.security.oauth2: debug
+    org.springframework.security: warn
+    org.springframework.security.oauth2: warn
+    org.springframework.test: debug
