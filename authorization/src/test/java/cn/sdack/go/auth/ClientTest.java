@@ -1,4 +1,4 @@
-package cn.sdack.go.users;
+package cn.sdack.go.auth;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,9 +18,14 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * @author sdack
+ * @date 2024/1/7
+ */
+
 @ExtendWith(RestDocumentationExtension.class)
 @SpringBootTest
-class UsersApplicationTests {
+public class ClientTest {
 
 
     private MockMvc mockMvc;
@@ -33,13 +38,15 @@ class UsersApplicationTests {
     }
 
     @Test
-    void contextLoads() throws Exception {
-        this.mockMvc.perform(get("/?q=a").accept(MediaType.APPLICATION_JSON))
+    void test() throws Exception {
+
+        this.mockMvc.perform(get("/test?q=1").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(document("index", queryParameters(
                         parameterWithName("q").description("查询")
                 )));
 
     }
+
 
 }

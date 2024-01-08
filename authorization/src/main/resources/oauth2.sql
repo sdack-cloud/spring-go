@@ -24,7 +24,7 @@ CREATE TABLE oauth2_authorization_consent
     PRIMARY KEY (registered_client_id, principal_name)
 );
 
-`
+
 CREATE TABLE oauth2_authorization
 (
     id                            varchar(100) NOT NULL,

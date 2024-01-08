@@ -3,11 +3,13 @@ package cn.sdack.go.common.entities.users;
 import cn.sdack.go.common.entities.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author sdack
  * @date 2023/12/26
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name = "users", indexes = {

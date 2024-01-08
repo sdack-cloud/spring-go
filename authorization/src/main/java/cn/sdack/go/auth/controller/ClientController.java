@@ -20,7 +20,7 @@ public class ClientController {
     ClientService clientService;
 
     @GetMapping("/test")
-    public JsonResult test() {
+    public JsonResult test(@RequestParam(name = "q") String q) {
         JsonResult jsonResult = JsonResult.toJson(true);
         return jsonResult;
     }

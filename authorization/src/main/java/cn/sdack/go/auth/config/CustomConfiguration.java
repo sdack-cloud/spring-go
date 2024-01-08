@@ -1,35 +1,21 @@
 package cn.sdack.go.auth.config;
 
 import cn.sdack.go.auth.dao.AccountDao;
-import cn.sdack.go.auth.dao.ClientDao;
 import cn.sdack.go.auth.dao.JpaRegisteredClientRepository;
 import cn.sdack.go.auth.entity.AccountEntity;
-import cn.sdack.go.auth.entity.ClientEntity;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.Module;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.jackson2.SecurityJackson2Modules;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
-import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
-import org.springframework.security.oauth2.server.authorization.jackson2.OAuth2AuthorizationServerJackson2Module;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
-import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
-import java.util.*;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @date 2023/12/23
@@ -66,13 +52,12 @@ public class CustomConfiguration {
                     .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                     .authorizationGrantType(AuthorizationGrantType.DEVICE_CODE)
                     .authorizationGrantType(AuthorizationGrantType.JWT_BEARER)
-                    .redirectUri("http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc")
-                    .redirectUri("http://127.0.0.1:8080/authorized")
+                    .redirectUri("http://localhost:5173/dashboard/index")
                     .postLogoutRedirectUri("http://127.0.0.1:8080/logged-out")
                     .scope(OidcScopes.OPENID)
                     .scope(OidcScopes.PROFILE)
-                    .scope("message.read")
-                    .scope("message.write")
+                    .scope("read")
+                    .scope("write")
                     .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                     .build();
 

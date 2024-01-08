@@ -1,0 +1,29 @@
+= Spring REST Docs TestNG Sample
+Andy Wilkinson;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+
+Sample application demonstrating how to use Spring REST Docs with TestNG.
+
+`SampleTestNgApplicationTests` makes a call to a very simple service and produces three
+documentation snippets.
+
+One showing how to make a request using cURL:
+
+include::{snippets}/index/curl-request.adoc[]
+
+One showing how to make a request using HTTPie:
+
+include::{snippets}/index/httpie-request.adoc[]
+
+One showing the HTTP request:
+
+include::{snippets}/index/http-request.adoc[]
+include::{snippets}/index/query-parameters.adoc[]
+include::{snippets}/index/request-body.adoc[]
+
+
+And one showing the HTTP response:
+
+include::{snippets}/index/http-response.adoc[]
